@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real-Time Digital Clock</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-slate-900 h-screen flex items-center justify-center font-sans p-4">
+
+    <div class="bg-slate-800 p-10 rounded-3xl shadow-2xl border border-slate-700 text-center w-full max-w-md">
+
+        <h1 class="text-sm font-bold text-cyan-400 uppercase tracking-widest mb-6">
+            Local Time
+        </h1>
+
+        <div class="bg-slate-900 py-8 rounded-2xl border border-slate-700 shadow-inner flex items-center justify-center">
+
+            <span id="clock-display" class="text-5xl sm:text-6xl font-mono font-bold text-white tracking-widest">
+                00:00:00
+            </span>
+
+        </div>
+
+    </div>
+
+    <script src="app.js"></script>
+
+</body>
+
+</html>

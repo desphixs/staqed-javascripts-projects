@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ledger | Expense Tracker</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Custom scrollbar for the history list to keep the UI clean */
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 10px;
+        }
+
+        /* Group hover effect for the delete button */
+        .transaction-item:hover .delete-btn {
+            opacity: 1;
+            pointer-events: auto;
+        }
+    </style>
+</head>
+
+<body class="bg-slate-100 min-h-screen flex items-center justify-center p-4">
+
+    <main class="bg-white max-w-md w-full rounded-3xl shadow-sm border border-slate-100 overflow-hidden">
+
+        <header class="bg-slate-900 text-white p-8 text-center rounded-b-3xl shadow-md">
+            <h1 class="text-slate-400 text-sm font-medium uppercase tracking-widest mb-2">Total Balance</h1>
+            <h2 id="balance" class="text-4xl font-bold tracking-tight">$0.00</h2>
+        </header>
+
+        <div class="p-8">
+            <section class="flex justify-between bg-white shadow-sm border border-slate-100 rounded-2xl p-4 mb-8 -mt-14 relative z-10">
+                <article class="flex-1 text-center border-r border-slate-100">
+                    <h3 class="text-xs text-slate-400 uppercase tracking-wide font-semibold mb-1">Income</h3>
+                    <p id="money-plus" class="text-emerald-500 font-bold text-lg">+$0.00</p>
+                </article>
+                <article class="flex-1 text-center">
+                    <h3 class="text-xs text-slate-400 uppercase tracking-wide font-semibold mb-1">Expense</h3>
+                    <p id="money-minus" class="text-rose-500 font-bold text-lg">-$0.00</p>
+                </article>
+            </section>
+
+            <section class="mb-8">
+                <h3 class="text-lg font-semibold text-slate-800 border-b border-slate-100 pb-2 mb-4">History</h3>
+                <ul id="list" class="max-h-48 overflow-y-auto custom-scrollbar pr-2 space-y-3">
+                </ul>
+            </section>
+
+            <section>
+                <h3 class="text-lg font-semibold text-slate-800 border-b border-slate-100 pb-2 mb-4">Add Transaction</h3>
+                <form id="form" class="space-y-4">
+                    <div>
+                        <label for="text" class="block text-sm font-medium text-slate-600 mb-1">Description</label>
+                        <input type="text" id="text" placeholder="e.g., Salary, Groceries" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 outline-none focus:border-blue-400 transition-colors" required>
+                    </div>
+                    <div>
+                        <label for="amount" class="block text-sm font-medium text-slate-600 mb-1">
+                            Amount <span class="text-slate-400 font-normal">(negative - expense, positive + income)</span>
+                        </label>
+                        <input type="number" id="amount" placeholder="-20.00" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 outline-none focus:border-blue-400 transition-colors" step="0.01" required>
+                    </div>
+                    <button class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl py-3 transition-colors shadow-sm">
+                        Add Transaction
+                    </button>
+                </form>
+            </section>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

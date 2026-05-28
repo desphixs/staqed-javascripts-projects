@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inspirado | Random Quote Generator</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .quote-transition {
+            transition: opacity 0.3s ease-in-out;
+        }
+    </style>
+</head>
+
+<body class="bg-slate-50 min-h-screen flex items-center justify-center p-6">
+
+    <main class="w-full max-w-lg">
+        <article class="bg-white rounded-3xl shadow-sm border border-slate-100 p-8 md:p-12 text-center relative overflow-hidden">
+
+            <div class="absolute top-0 left-0 p-4 opacity-5">
+                <i class="fa-solid fa-quote-left text-8xl"></i>
+            </div>
+
+            <section id="quote-container" class="relative z-10 quote-transition">
+                <p id="quote-text" class="text-2xl md:text-3xl font-semibold text-slate-800 leading-tight italic">
+                    "Push yourself, because no one else is going to do it for you."
+                </p>
+                <p id="quote-author" class="mt-6 text-slate-500 font-medium tracking-wide uppercase text-sm">
+                    — Unknown
+                </p>
+            </section>
+
+            <nav class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4 relative z-10">
+                <button id="new-quote-btn" class="w-full sm:w-auto bg-slate-900 hover:bg-slate-800 text-white px-8 py-3 rounded-xl font-semibold transition-all active:scale-95 shadow-lg shadow-slate-200">
+                    <i class="fa-solid fa-bolt-lightning mr-2"></i> New Quote
+                </button>
+
+                <a id="tweet-quote-btn" target="_blank" href="#" class="w-full sm:w-auto bg-sky-500 hover:bg-sky-400 text-white px-8 py-3 rounded-xl font-semibold transition-all flex items-center justify-center shadow-lg shadow-sky-100">
+                    <i class="fa-brands fa-twitter mr-2"></i> Tweet
+                </a>
+            </nav>
+        </article>
+
+        <footer class="mt-8 text-center text-slate-400 text-xs tracking-widest uppercase">
+            <a href="https://staqed.com">Built by Staqed</a>
+        </footer>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

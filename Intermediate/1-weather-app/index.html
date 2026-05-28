@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkyCast | Minimalist Weather</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { font-family: 'Inter', sans-serif; transition: background 0.5s ease; }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+    </style>
+</head>
+<body class="bg-slate-100 min-h-screen flex items-center justify-center p-6 bg-cover bg-center bg-no-repeat" id="body-bg" style="background-image: url('https://images.unsplash.com/photo-1504608524841-42fe6f032b4b?q=80&w=2000&auto=format&fit=crop')">
+
+    <main class="w-full max-w-md">
+        <header class="glass-card p-2 rounded-2xl flex items-center mb-6 shadow-sm">
+            <input 
+                type="text" 
+                id="city-input" 
+                placeholder="Enter city name..." 
+                class="bg-transparent flex-1 px-4 py-2 outline-none text-slate-700 font-medium"
+            >
+            <button id="search-btn" class="bg-blue-500 hover:bg-blue-600 text-white w-10 h-10 rounded-xl transition-all flex items-center justify-center">
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </button>
+        </header>
+
+        <article id="weather-card" class="glass-card rounded-3xl p-8 shadow-xl text-center hidden">
+            <header>
+                <h1 id="city-name" class="text-3xl font-bold text-slate-800">London</h1>
+                <p id="weather-desc" class="text-slate-500 capitalize font-medium">Clear Sky</p>
+            </header>
+
+            <section class="my-8">
+                <i id="weather-icon" class="fa-solid fa-sun text-7xl text-yellow-400 mb-4"></i>
+                <div class="text-6xl font-bold text-slate-800">
+                    <span id="temp-display">22</span>°C
+                </div>
+            </section>
+
+            <footer class="grid grid-cols-2 gap-4 border-t border-slate-200 pt-6">
+                <div class="flex flex-col items-center">
+                    <i class="fa-solid fa-droplet text-blue-400 mb-1"></i>
+                    <span class="text-xs text-slate-400 uppercase tracking-wider">Humidity</span>
+                    <span id="humidity-display" class="font-semibold text-slate-700">45%</span>
+                </div>
+                <div class="flex flex-col items-center">
+                    <i class="fa-solid fa-wind text-slate-400 mb-1"></i>
+                    <span class="text-xs text-slate-400 uppercase tracking-wider">Wind Speed</span>
+                    <span id="wind-display" class="font-semibold text-slate-700">12 km/h</span>
+                </div>
+            </footer>
+        </article>
+
+        <section id="status-message" class="text-center text-slate-600 font-medium">
+            <p>Enter a city to see the magic happen.</p>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

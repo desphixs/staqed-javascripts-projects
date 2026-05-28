@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vault | Currency Converter</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* Hide the default number input arrows for a cleaner Soft UI look */
+        input[type=number]::-webkit-inner-spin-button,
+        input[type=number]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+    </style>
+</head>
+
+<body class="bg-slate-50 min-h-screen flex items-center justify-center p-4 text-slate-800">
+
+    <main class="w-full max-w-md bg-white rounded-3xl shadow-sm border border-slate-100 overflow-hidden">
+
+        <header class="bg-blue-600 p-8 text-center text-white">
+            <h1 class="text-2xl font-semibold mb-2 flex items-center justify-center gap-3">
+                <i class="fa-solid fa-coins text-yellow-300"></i> Vault Converter
+            </h1>
+            <p class="text-blue-100 text-sm font-light">Real-time exchange rates</p>
+        </header>
+
+        <section class="p-8">
+
+            <article class="mb-6">
+                <label for="amount" class="block text-sm font-medium text-slate-500 mb-2">Amount</label>
+                <div class="relative">
+                    <span class="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 font-medium">$</span>
+                    <input
+                        type="number"
+                        id="amount"
+                        value="1"
+                        min="0"
+                        class="w-full bg-slate-50 border border-slate-200 rounded-xl py-4 pl-10 pr-4 text-lg font-semibold text-slate-800 outline-none focus:border-blue-400 focus:bg-white transition-colors">
+                </div>
+            </article>
+
+            <article class="flex items-center gap-4 mb-8">
+
+                <div class="flex-1">
+                    <label for="currency-from" class="block text-sm font-medium text-slate-500 mb-2">From</label>
+                    <select id="currency-from" class="w-full bg-slate-50 border border-slate-200 rounded-xl p-4 text-slate-800 font-medium outline-none focus:border-blue-400 cursor-pointer appearance-none transition-colors">
+                        <option value="USD">USD</option>
+                    </select>
+                </div>
+
+                <div class="flex flex-col justify-end mt-7">
+                    <button id="swap-btn" class="w-12 h-12 bg-slate-100 hover:bg-slate-200 text-slate-600 rounded-full flex items-center justify-center transition-colors shadow-sm" title="Swap currencies">
+                        <i class="fa-solid fa-arrow-right-arrow-left"></i>
+                    </button>
+                </div>
+
+                <div class="flex-1">
+                    <label for="currency-to" class="block text-sm font-medium text-slate-500 mb-2">To</label>
+                    <select id="currency-to" class="w-full bg-slate-50 border border-slate-200 rounded-xl p-4 text-slate-800 font-medium outline-none focus:border-blue-400 cursor-pointer appearance-none transition-colors">
+                        <option value="EUR">EUR</option>
+                    </select>
+                </div>
+            </article>
+
+            <div id="status-msg" class="text-center text-sm text-slate-400 mb-4 font-medium h-5">
+                Fetching latest rates...
+            </div>
+
+            <footer class="text-center bg-blue-50 border border-blue-100 rounded-2xl p-6">
+                <p id="exchange-rate-text" class="text-sm font-medium text-blue-500 mb-1">1 USD = 0.93 EUR</p>
+                <p id="result-display" class="text-4xl font-bold text-slate-800">0.93 EUR</p>
+            </footer>
+
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

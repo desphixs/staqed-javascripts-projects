@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Magic Color Flipper</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body id="page-body" class="bg-gray-100 h-screen flex items-center justify-center transition-colors duration-500">
+
+    <div class="bg-white p-10 rounded-2xl shadow-xl text-center flex flex-col items-center gap-6">
+
+        <h1 class="text-3xl font-bold text-gray-800 tracking-tight">
+            Magic Color Flipper
+        </h1>
+
+        <p class="text-gray-500">
+            Click the button below to change the background!
+        </p>
+
+        <button id="color-btn" class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 px-8 rounded-full shadow-md hover:shadow-lg transition-all transform hover:-translate-y-1">
+            Flip Color
+        </button>
+
+    </div>
+
+    <script src="app.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BrainWave | Quiz App</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* Smooth transition for the progress bar */
+        .progress-transition {
+            transition: width 0.4s ease-in-out;
+        }
+    </style>
+</head>
+
+<body class="bg-slate-50 min-h-screen flex items-center justify-center p-4">
+
+    <main class="w-full max-w-lg bg-white rounded-3xl shadow-sm border border-slate-100 overflow-hidden relative min-h-[450px] flex flex-col">
+
+        <section id="start-screen" class="flex-1 flex flex-col items-center justify-center p-8 text-center">
+            <i class="fa-solid fa-bolt text-5xl text-yellow-400 mb-4"></i>
+            <h1 class="text-3xl font-bold text-slate-800 mb-2">BrainWave Quiz</h1>
+            <p class="text-slate-500 mb-8">Test your web development knowledge. You have 60 seconds to complete all questions!</p>
+            <button id="start-btn" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-xl shadow-sm transition-colors">
+                Start Quiz
+            </button>
+        </section>
+
+        <section id="quiz-screen" class="hidden flex-1 flex-col">
+            <header class="p-6 pb-0 flex justify-between items-center mb-4">
+                <div class="text-slate-500 font-medium">
+                    Question <span id="current-q-num" class="text-blue-600 font-bold">1</span>/<span id="total-q-num">5</span>
+                </div>
+                <div class="flex items-center gap-2 bg-rose-50 text-rose-600 px-3 py-1 rounded-lg font-semibold">
+                    <i class="fa-regular fa-clock"></i>
+                    <span id="timer-display">60s</span>
+                </div>
+            </header>
+
+            <div class="w-full bg-slate-100 h-2 mb-6">
+                <div id="progress-bar" class="bg-blue-500 h-2 progress-transition w-0"></div>
+            </div>
+
+            <article class="p-6 pt-0 flex-1 flex flex-col">
+                <h2 id="question-text" class="text-xl font-semibold text-slate-800 mb-6">Question goes here?</h2>
+
+                <div id="options-container" class="flex flex-col gap-3 mb-6">
+                </div>
+
+                <footer class="mt-auto flex justify-end">
+                    <button id="next-btn" class="hidden bg-slate-800 hover:bg-slate-900 text-white font-medium py-3 px-6 rounded-xl transition-colors">
+                        Next Question <i class="fa-solid fa-arrow-right ml-2"></i>
+                    </button>
+                </footer>
+            </article>
+        </section>
+
+        <section id="result-screen" class="hidden flex-1 flex-col items-center justify-center p-8 text-center">
+            <i class="fa-solid fa-trophy text-6xl text-yellow-400 mb-4"></i>
+            <h2 class="text-3xl font-bold text-slate-800 mb-2">Quiz Complete!</h2>
+            <p class="text-slate-500 mb-6">Here is how you performed under pressure.</p>
+
+            <div class="bg-slate-50 rounded-2xl p-6 w-full mb-8 border border-slate-100">
+                <h3 class="text-sm font-medium text-slate-400 uppercase tracking-widest mb-1">Your Score</h3>
+                <p class="text-5xl font-bold text-blue-600"><span id="final-score">0</span><span class="text-2xl text-slate-400">/5</span></p>
+            </div>
+
+            <button id="restart-btn" class="bg-slate-800 hover:bg-slate-900 text-white font-semibold py-3 px-8 rounded-xl transition-colors">
+                Play Again
+            </button>
+        </section>
+
+    </main>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

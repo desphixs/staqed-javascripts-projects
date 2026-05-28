@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS Drum Kit | Beat Maker</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* Custom "Playing" animation state */
+        .playing {
+            transform: scale(1.1);
+            border-color: #fbbf24;
+            /* Tailwind yellow-400 */
+            box-shadow: 0 0 20px #fbbf24;
+        }
+    </style>
+</head>
+
+<body class="bg-slate-900 min-h-screen flex flex-col items-center justify-center p-4">
+
+    <header class="mb-12 text-center">
+        <h1 class="text-4xl md:text-5xl font-extrabold text-white mb-2 tracking-tight">
+            JS DRUM <span class="text-yellow-400">KIT</span>
+        </h1>
+        <p class="text-slate-400 font-medium">Press the keys or click the pads to play</p>
+    </header>
+
+    <main id="drum-container" class="grid grid-cols-2 md:grid-cols-4 gap-4 w-full max-w-4xl">
+        <article data-key="KeyA" class="drum-pad bg-slate-800 border-4 border-slate-700 p-6 rounded-2xl flex flex-col items-center justify-center transition-all duration-75 cursor-pointer hover:border-slate-500">
+            <kbd class="text-3xl font-extrabold text-white">A</kbd>
+            <span class="text-yellow-400 text-xs font-bold uppercase tracking-widest mt-2">Clap</span>
+        </article>
+
+        <article data-key="KeyS" class="drum-pad bg-slate-800 border-4 border-slate-700 p-6 rounded-2xl flex flex-col items-center justify-center transition-all duration-75 cursor-pointer hover:border-slate-500">
+            <kbd class="text-3xl font-extrabold text-white">S</kbd>
+            <span class="text-yellow-400 text-xs font-bold uppercase tracking-widest mt-2">Hi-Hat</span>
+        </article>
+
+        <article data-key="KeyD" class="drum-pad bg-slate-800 border-4 border-slate-700 p-6 rounded-2xl flex flex-col items-center justify-center transition-all duration-75 cursor-pointer hover:border-slate-500">
+            <kbd class="text-3xl font-extrabold text-white">D</kbd>
+            <span class="text-yellow-400 text-xs font-bold uppercase tracking-widest mt-2">Kick</span>
+        </article>
+
+        <article data-key="KeyF" class="drum-pad bg-slate-800 border-4 border-slate-700 p-6 rounded-2xl flex flex-col items-center justify-center transition-all duration-75 cursor-pointer hover:border-slate-500">
+            <kbd class="text-3xl font-extrabold text-white">F</kbd>
+            <span class="text-yellow-400 text-xs font-bold uppercase tracking-widest mt-2">Snare</span>
+        </article>
+    </main>
+
+    <footer class="mt-16 text-slate-500 text-sm italic">
+        Keep your volume up! 🎧
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

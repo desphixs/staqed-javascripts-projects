@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jot | Markdown Notes</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Custom styling for the parsed markdown content to ensure it looks clean */
+        .markdown-preview h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: #0f172a;
+        }
+
+        .markdown-preview h2 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #1e293b;
+        }
+
+        .markdown-preview strong {
+            font-weight: 700;
+            color: #3b82f6;
+        }
+
+        .markdown-preview em {
+            font-style: italic;
+            color: #64748b;
+        }
+    </style>
+</head>
+
+<body class="bg-slate-50 min-h-screen text-slate-800 p-4 md:p-8">
+
+    <main class="max-w-6xl mx-auto">
+
+        <header class="flex flex-col md:flex-row justify-between items-center mb-8 gap-4">
+            <div>
+                <h1 class="text-3xl font-bold flex items-center gap-3 text-slate-900">
+                    <i class="fa-solid fa-pen-nib text-blue-500"></i> Jot.
+                </h1>
+                <p class="text-slate-500 text-sm mt-1">Write notes. Use Markdown. Never lose them.</p>
+            </div>
+
+            <button
+                id="add-note-btn"
+                class="bg-blue-600 hover:bg-blue-700 text-white font-medium px-6 py-3 rounded-xl shadow-sm transition-colors flex items-center gap-2">
+                <i class="fa-solid fa-plus"></i> Add Note
+            </button>
+        </header>
+
+        <section id="notes-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        </section>
+
+    </main>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

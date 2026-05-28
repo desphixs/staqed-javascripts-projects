@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Simple Counter</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-slate-100 h-screen flex items-center justify-center font-sans">
+
+    <div class="bg-white p-12 rounded-3xl shadow-2xl text-center w-full max-w-lg mx-4">
+
+        <h1 class="text-3xl font-extrabold text-slate-900 mb-8 tracking-tight">
+            Digital Counter
+        </h1>
+
+        <div class="flex items-center justify-center mb-10">
+            <span id="count" class="text-8xl font-mono font-black text-black transition-all duration-300">
+                0
+            </span>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+
+            <button id="decrease-btn" class="w-full bg-red-500 hover:bg-red-600 text-white font-bold py-4 px-6 rounded-xl shadow-md hover:shadow-lg transition duration-200 uppercase text-sm tracking-wide">
+                Decrease (-1)
+            </button>
+
+            <button id="reset-btn" class="w-full bg-slate-600 hover:bg-slate-700 text-white font-bold py-4 px-6 rounded-xl shadow-md hover:shadow-lg transition duration-200 uppercase text-sm tracking-wide">
+                Reset (0)
+            </button>
+
+            <button id="increase-btn" class="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-4 px-6 rounded-xl shadow-md hover:shadow-lg transition duration-200 uppercase text-sm tracking-wide">
+                Increase (+1)
+            </button>
+
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FocusFlow // Simple To-Do</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Custom checkbox transition for a smoother feel */
+        .task-checkbox:checked+span {
+            text-decoration: line-through;
+            opacity: 0.5;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 min-h-screen flex items-center justify-center p-6">
+
+    <main class="w-full max-w-md bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
+
+        <header class="mb-8 text-center">
+            <h1 class="text-2xl font-600 text-gray-800 tracking-tight">FocusFlow</h1>
+            <p class="text-sm text-gray-400 mt-1">What's on your mind today?</p>
+        </header>
+
+        <section class="mb-6">
+            <form id="todo-form" class="flex gap-2">
+                <input
+                    type="text"
+                    id="todo-input"
+                    placeholder="Add a new task..."
+                    class="flex-1 bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all"
+                    required>
+                <button
+                    type="submit"
+                    class="bg-indigo-600 hover:bg-indigo-700 text-white px-5 py-3 rounded-xl transition-colors duration-200 flex items-center justify-center"
+                    aria-label="Add Task">
+                    <i class="fas fa-plus"></i>
+                </button>
+            </form>
+        </section>
+
+        <ul id="task-list" class="space-y-3">
+        </ul>
+
+        <div id="empty-state" class="hidden text-center py-10">
+            <img src="https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?auto=format&fit=crop&q=80&w=200" alt="Notebook" class="w-20 h-20 mx-auto rounded-full grayscale opacity-20 mb-4">
+            <p class="text-gray-400 text-sm">All caught up! Relax.</p>
+        </div>
+
+    </main>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

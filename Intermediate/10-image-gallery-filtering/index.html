@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prism | Image Gallery</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* Smooth scale and fade in for gallery items when they are filtered */
+        .pop-in {
+            animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+            opacity: 0;
+            transform: scale(0.9);
+        }
+
+        @keyframes popIn {
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* Glassmorphism background for the Lightbox */
+        .glass-overlay {
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(8px);
+        }
+    </style>
+</head>
+
+<body class="bg-slate-50 min-h-screen text-slate-800 p-4 md:p-8">
+
+    <main class="max-w-7xl mx-auto">
+
+        <header class="flex flex-col md:flex-row justify-between items-center mb-8 gap-6 bg-white p-6 rounded-3xl shadow-sm border border-slate-100">
+            <h1 class="text-3xl font-bold flex items-center gap-3 text-slate-900">
+                <i class="fa-solid fa-camera-retro text-indigo-500"></i> Prism.
+            </h1>
+
+            <div class="relative w-full md:w-96">
+                <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"></i>
+                <input
+                    type="text"
+                    id="search-input"
+                    placeholder="Search image titles..."
+                    class="w-full bg-slate-50 border border-slate-200 rounded-xl py-3 pl-12 pr-4 outline-none focus:border-indigo-400 focus:bg-white transition-colors text-slate-700">
+            </div>
+        </header>
+
+        <nav class="flex flex-wrap gap-3 mb-8" id="filter-nav">
+            <button class="filter-btn active-filter bg-indigo-600 text-white px-6 py-2 rounded-xl font-medium shadow-sm transition-colors" data-category="All">All</button>
+            <button class="filter-btn bg-white text-slate-600 hover:bg-slate-100 border border-slate-200 px-6 py-2 rounded-xl font-medium transition-colors" data-category="Nature">Nature</button>
+            <button class="filter-btn bg-white text-slate-600 hover:bg-slate-100 border border-slate-200 px-6 py-2 rounded-xl font-medium transition-colors" data-category="Tech">Tech</button>
+            <button class="filter-btn bg-white text-slate-600 hover:bg-slate-100 border border-slate-200 px-6 py-2 rounded-xl font-medium transition-colors" data-category="Animals">Animals</button>
+        </nav>
+
+        <section id="gallery-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        </section>
+
+        <p id="empty-state" class="hidden text-center text-slate-500 py-12 w-full text-lg font-medium">
+            No images match your search. Try another keyword!
+        </p>
+
+    </main>
+
+    <section id="lightbox" class="hidden fixed inset-0 z-50 flex items-center justify-center glass-overlay p-4 opacity-0 transition-opacity duration-300">
+
+        <button id="close-lightbox" class="absolute top-6 right-6 w-12 h-12 bg-white/10 hover:bg-white/20 text-white rounded-full flex items-center justify-center transition-colors border border-white/20 text-xl z-10" title="Close">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+
+        <article class="max-w-5xl w-full flex flex-col items-center relative transform scale-95 transition-transform duration-300" id="lightbox-content">
+            <img id="lightbox-img" src="" alt="" class="max-h-[80vh] w-auto rounded-xl shadow-2xl object-contain mb-4">
+            <h2 id="lightbox-title" class="text-white text-2xl font-semibold tracking-wide">Image Title</h2>
+            <p id="lightbox-category" class="text-indigo-300 text-sm uppercase tracking-widest font-medium mt-1">Category</p>
+        </article>
+
+    </section>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

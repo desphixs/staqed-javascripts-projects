@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CineSync - Movie Database</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet" />
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'] },
+                    colors: {
+                        base: '#09090b',       /* Deep black background */
+                        surface: '#18181b',    /* Slightly lighter card background */
+                        brand: '#e11d48'       /* Cinematic Red */
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="bg-base text-zinc-300 font-sans min-h-screen flex flex-col selection:bg-brand selection:text-white">
+
+    <header class="sticky top-0 z-50 bg-base/90 backdrop-blur-md border-b border-white/10 px-6 py-4 flex flex-col md:flex-row justify-between items-center gap-4">
+
+        <div class="flex items-center gap-2">
+            <div class="w-8 h-8 bg-brand rounded-md flex items-center justify-center text-white font-bold">
+                <i class="ri-movie-2-fill"></i>
+            </div>
+            <h1 class="text-xl font-extrabold text-white tracking-tight">CineSync</h1>
+        </div>
+
+        <div class="flex items-center gap-4 w-full md:w-auto">
+
+            <div class="relative w-full md:w-64">
+                <i class="ri-search-line absolute left-3 top-1/2 -translate-y-1/2 text-zinc-500"></i>
+                <input
+                    type="text"
+                    id="search-input"
+                    placeholder="Search movies..."
+                    class="w-full bg-surface border border-white/10 rounded-full py-2 pl-10 pr-4 text-sm text-white focus:outline-none focus:border-brand transition-colors">
+            </div>
+
+            <button
+                id="filter-btn"
+                class="whitespace-nowrap bg-surface hover:bg-white/10 border border-white/10 text-white text-sm font-medium py-2 px-4 rounded-full transition-colors flex items-center gap-2">
+                <i class="ri-star-fill text-brand"></i> Top Rated
+            </button>
+
+        </div>
+    </header>
+
+    <main class="flex-grow p-6 max-w-[1600px] mx-auto w-full">
+        <div id="movie-grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
+        </div>
+
+        <div id="empty-state" class="hidden flex-col items-center justify-center py-20 text-center">
+            <i class="ri-film-line text-6xl text-zinc-700 mb-4"></i>
+            <h2 class="text-xl font-bold text-white mb-2">No movies found</h2>
+            <p class="text-zinc-500">Try adjusting your search or filter.</p>
+        </div>
+    </main>
+
+    <script>
+        // --- ARC STEP 1: The Vault (Arrays & Objects) ---
+        // We create a database of movies. In the real world, this comes from a server.
+        // We are using actual TMDB poster image paths so the UI looks stunning immediately.
+        let movies = [
+            { id: 1, title: "Inception", rating: 8.8, year: 2010, poster: "https://image.tmdb.org/t/p/w500/oYuLEt3zVCKq57qu2F8dT7NIa6f.jpg" },
+            { id: 2, title: "Interstellar", rating: 8.6, year: 2014, poster: "https://image.tmdb.org/t/p/w500/gEU2QniE6E77NI6lCU6MxlNBvIx.jpg" },
+            { id: 3, title: "The Dark Knight", rating: 9.0, year: 2008, poster: "https://image.tmdb.org/t/p/w500/qJ2tW6WMUDux911r6m7haRef0WH.jpg" },
+            { id: 4, title: "Avatar", rating: 7.9, year: 2009, poster: "https://image.tmdb.org/t/p/w500/jRXYjXNq0Cs2TcJjLkki24MLp7u.jpg" },
+            { id: 5, title: "The Matrix", rating: 8.7, year: 1999, poster: "https://image.tmdb.org/t/p/w500/f89U3ADr1oiB1s9GkdPOEpXUk5H.jpg" },
+            { id: 6, title: "Joker", rating: 8.4, year: 2019, poster: "https://i.ebayimg.com/images/g/qjsAAOSw7MZfofvg/s-l1200.jpg" },
+            { id: 7, title: "Avengers: Endgame", rating: 8.3, year: 2019, poster: "https://image.tmdb.org/t/p/w500/or06FN3Dka5tukK1e9sl16pB3iy.jpg" },
+            { id: 8, title: "Parasite", rating: 8.5, year: 2019, poster: "https://image.tmdb.org/t/p/w500/7IiTTgloJzvGI1TAYymCfbfl3vT.jpg" },
+            { id: 9, title: "Spider-Man: No Way Home", rating: 8.0, year: 2021, poster: "https://m.media-amazon.com/images/M/MV5BMmFiZGZjMmEtMTA0Ni00MzA2LTljMTYtZGI2MGJmZWYzZTQ2XkEyXkFqcGc@._V1_.jpg" },
+            { id: 10, title: "Dune", rating: 7.9, year: 2021, poster: "https://image.tmdb.org/t/p/w500/d5NXSklXo0qyIYkgV94XAgMIckC.jpg" }
+        ];
+
+        // Global variable to keep track of our currently displayed movies
+        let currentMovies = [...movies];
+
+        // DOM Elements
+        const movieGrid = document.getElementById('movie-grid');
+        const emptyState = document.getElementById('empty-state');
+        const filterBtn = document.getElementById('filter-btn');
+        const searchInput = document.getElementById('search-input');
+
+
+        // --- ARC STEP 2: The Factory (Loops & DOM Creation) ---
+        // This function takes an array of movies and transforms them into HTML elements
+        function renderMovies(moviesArray) {
+            // 1. Clear the grid first
+            movieGrid.innerHTML = '';
+
+            // 2. Handle empty states
+            if (moviesArray.length === 0) {
+                emptyState.classList.remove('hidden');
+                emptyState.classList.add('flex');
+                return;
+            } else {
+                emptyState.classList.add('hidden');
+                emptyState.classList.remove('flex');
+            }
+
+            // 3. Loop through the array and build HTML cards
+            moviesArray.forEach(movie => {
+                // We use template literals to build a beautiful movie card
+                // Note the 'aspect-[2/3]' class which forces standard movie poster dimensions
+                const cardHTML = `
+                    <div class="group relative rounded-xl overflow-hidden bg-surface cursor-pointer shadow-lg hover:shadow-2xl hover:shadow-brand/20 transition-all duration-300 transform hover:-translate-y-2">
+                        
+                        <div class="aspect-[2/3] w-full overflow-hidden">
+                            <img src="${movie.poster}" alt="${movie.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        </div>
+                        
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-80 group-hover:opacity-100 transition-opacity"></div>
+                        
+                        <div class="absolute bottom-0 left-0 w-full p-4 flex flex-col justify-end">
+                            <h3 class="text-white font-bold text-lg leading-tight mb-1 truncate">${movie.title}</h3>
+                            
+                            <div class="flex items-center justify-between">
+                                <span class="text-xs text-zinc-400">${movie.year}</span>
+                                <div class="flex items-center gap-1 bg-black/50 backdrop-blur-md px-2 py-1 rounded-md border border-white/10">
+                                    <i class="ri-star-fill text-brand text-xs"></i>
+                                    <span class="text-white text-xs font-bold">${movie.rating.toFixed(1)}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+
+                // Add the card to our grid
+                movieGrid.innerHTML += cardHTML;
+            });
+        }
+
+
+        // --- ARC STEP 3: The Bouncer (Filtering & Logic) ---
+        let isFiltered = false;
+
+        filterBtn.addEventListener('click', () => {
+            if (!isFiltered) {
+                // Filter to show ONLY movies with rating 8.5 or higher
+                currentMovies = currentMovies.filter(movie => movie.rating >= 8.5);
+
+                // Visual update for button
+                filterBtn.classList.add('bg-brand', 'border-brand');
+                filterBtn.classList.remove('bg-surface', 'border-white/10');
+                isFiltered = true;
+            } else {
+                // Reset filter (We re-apply search if there is any text in the input)
+                const searchTerm = searchInput.value.toLowerCase();
+                currentMovies = movies.filter(movie => movie.title.toLowerCase().includes(searchTerm));
+
+                // Visual update for button
+                filterBtn.classList.remove('bg-brand', 'border-brand');
+                filterBtn.classList.add('bg-surface', 'border-white/10');
+                isFiltered = false;
+            }
+
+            renderMovies(currentMovies);
+        });
+
+
+        // --- ARC STEP 4: The Search (String Methods & Events) ---
+        searchInput.addEventListener('keyup', (e) => {
+            // Grab what the user typed and make it lowercase
+            const searchTerm = e.target.value.toLowerCase();
+
+            // Start with our master list of movies
+            let filteredList = movies;
+
+            // If the Top Rated filter is currently active, we must search within the filtered list
+            if (isFiltered) {
+                filteredList = filteredList.filter(movie => movie.rating >= 8.5);
+            }
+
+            // Filter the list to only include movies whose title contains the search term
+            currentMovies = filteredList.filter(movie =>
+                movie.title.toLowerCase().includes(searchTerm)
+            );
+
+            // Re-render the UI with the new list
+            renderMovies(currentMovies);
+        });
+
+
+        // --- ARC STEP 5: The Upgrade (Real APIs) ---
+        /* CURRICULUM NOTE: 
+        Once the student understands arcs 1-4, you can teach them to delete the 
+        hardcoded 'movies' array at the top, and uncomment the code below. 
+        They will need to get a free API key from themoviedb.org
+        */
+
+        /*
+        const API_KEY = 'YOUR_TMDB_API_KEY'; 
+        const API_URL = `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&language=en-US&page=1`;
+        const IMAGE_BASE_URL = 'https://image.tmdb.org/t/p/w500';
+
+        async function fetchRealMovies() {
+            try {
+                // 1. Ask the server for data
+                const response = await fetch(API_URL);
+                const data = await response.json();
+                
+                // 2. Transform TMDB's messy data into our clean format
+                movies = data.results.map(tmdbMovie => {
+                    return {
+                        id: tmdbMovie.id,
+                        title: tmdbMovie.title,
+                        rating: tmdbMovie.vote_average,
+                        year: tmdbMovie.release_date.split('-')[0], // Grabs just the year
+                        poster: IMAGE_BASE_URL + tmdbMovie.poster_path
+                    };
+                });
+
+                // 3. Update our current working list and render
+                currentMovies = [...movies];
+                renderMovies(currentMovies);
+
+            } catch (error) {
+                console.error("Failed to fetch movies from TMDB:", error);
+            }
+        }
+        */
+
+        // --- INITIALIZATION ---
+        // Boot up the factory when the page loads
+        renderMovies(currentMovies);
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Precision Timer | Countdown</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+
+<body class="bg-slate-50 min-h-screen flex items-center justify-center p-6 text-slate-900">
+
+    <main class="w-full max-w-2xl bg-white rounded-3xl shadow-sm border border-slate-100 p-8 md:p-12">
+        <header class="text-center mb-10">
+            <h1 class="text-3xl font-extrabold tracking-tight mb-2">Event Countdown</h1>
+            <p class="text-slate-500">Set your target date and watch the seconds tick away.</p>
+        </header>
+
+        <section class="mb-12">
+            <div class="flex flex-col sm:flex-row gap-4 items-end justify-center">
+                <div class="w-full">
+                    <label for="date-input" class="block text-xs font-bold uppercase tracking-widest text-slate-400 mb-2 ml-1">Select Target Date</label>
+                    <input type="datetime-local" id="date-input" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-slate-900 transition-all">
+                </div>
+                <button id="start-btn" class="w-full sm:w-auto bg-slate-900 hover:bg-slate-800 text-white px-8 py-3 rounded-xl font-semibold transition-all active:scale-95 whitespace-nowrap">
+                    Set Timer
+                </button>
+            </div>
+        </section>
+
+        <section id="timer-display" class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+            <article class="bg-slate-50 p-4 rounded-2xl border border-slate-100">
+                <span id="days" class="block text-4xl font-extrabold text-slate-900">00</span>
+                <span class="text-xs uppercase font-bold text-slate-400 tracking-widest">Days</span>
+            </article>
+            <article class="bg-slate-50 p-4 rounded-2xl border border-slate-100">
+                <span id="hours" class="block text-4xl font-extrabold text-slate-900">00</span>
+                <span class="text-xs uppercase font-bold text-slate-400 tracking-widest">Hours</span>
+            </article>
+            <article class="bg-slate-50 p-4 rounded-2xl border border-slate-100">
+                <span id="minutes" class="block text-4xl font-extrabold text-slate-900">00</span>
+                <span class="text-xs uppercase font-bold text-slate-400 tracking-widest">Mins</span>
+            </article>
+            <article class="bg-slate-50 p-4 rounded-2xl border border-slate-100">
+                <span id="seconds" class="block text-4xl font-extrabold text-slate-900">00</span>
+                <span class="text-xs uppercase font-bold text-slate-400 tracking-widest">Secs</span>
+            </article>
+        </section>
+
+        <footer id="message" class="mt-10 text-center font-medium text-emerald-600 hidden">
+            <i class="fa-solid fa-circle-check mr-2"></i> The event has arrived!
+        </footer>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

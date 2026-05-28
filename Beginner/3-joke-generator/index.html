@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Joke Generator</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-violet-50 h-screen flex items-center justify-center font-sans p-4">
+
+    <div class="bg-white p-10 rounded-3xl shadow-xl text-center w-full max-w-lg border border-violet-100">
+
+        <h1 class="text-sm font-bold text-violet-500 uppercase tracking-widest mb-6">
+            Daily Chuckle
+        </h1>
+
+        <div class="min-h-[120px] flex items-center justify-center mb-8">
+            <p id="joke-display" class="text-2xl font-medium text-gray-800 leading-relaxed">
+                "Click the button below to get your first joke!"
+            </p>
+        </div>
+
+        <button id="generate-btn" class="bg-violet-600 hover:bg-violet-700 text-white font-semibold py-4 px-8 rounded-full shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-1 w-full sm:w-auto">
+            Tell me a joke ✨
+        </button>
+
+    </div>
+
+    <script src="app.js"></script>
+
+</body>
+
+</html>

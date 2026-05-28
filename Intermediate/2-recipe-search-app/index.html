@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Savor | Recipe Search</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* Smooth transitions for our UI elements */
+        .card-transition {
+            transition: all 0.3s ease;
+        }
+    </style>
+</head>
+
+<body class="bg-slate-50 text-slate-800 min-h-screen">
+
+    <main class="container mx-auto px-4 py-12 max-w-6xl">
+
+        <header class="text-center mb-12">
+            <h1 class="text-4xl md:text-5xl font-semibold text-slate-900 mb-4 flex justify-center items-center gap-3">
+                <i class="fa-solid fa-utensils text-orange-400"></i> Savor
+            </h1>
+            <p class="text-slate-500 text-lg">Discover your next favorite meal.</p>
+        </header>
+
+        <section class="max-w-2xl mx-auto mb-12">
+            <form id="search-form" class="bg-white p-2 rounded-2xl shadow-sm flex items-center border border-slate-100">
+                <i class="fa-solid fa-magnifying-glass text-slate-400 ml-4"></i>
+                <input
+                    type="text"
+                    id="search-input"
+                    placeholder="Search for chicken, pasta, vegan..."
+                    class="flex-1 bg-transparent px-4 py-3 outline-none text-slate-700"
+                    required>
+                <button
+                    type="submit"
+                    class="bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 rounded-xl font-medium transition-colors">
+                    Search
+                </button>
+            </form>
+        </section>
+
+        <section id="loading-spinner" class="hidden flex-col items-center justify-center py-12">
+            <i class="fa-solid fa-circle-notch fa-spin text-4xl text-orange-400 mb-4"></i>
+            <p class="text-slate-500 font-medium">Fetching recipes...</p>
+        </section>
+
+        <section id="message-container" class="hidden text-center py-12">
+            <p id="message-text" class="text-xl text-slate-500 font-medium">No recipes found. Try a different search!</p>
+        </section>
+
+        <article id="recipe-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        </article>
+
+    </main>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
